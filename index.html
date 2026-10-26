@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MindMap AI | Student Dashboard</title>
+
+    <meta name="description"
+          content="MindMap AI - Your personalized gamified learning dashboard.">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard"
+     data-student-id="{{ student.id }}">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">✦ MindMap <span>AI</span></div>
+
+        <p class="menu-label">MENU</p>
+
+        <nav aria-label="Main navigation">
+            <a href="#overview" class="nav-item active">⌂ Dashboard</a>
+            <a href="#learning" class="nav-item">▤ My Learning</a>
+            <a href="#quiz" class="nav-item">✎ Quizzes</a>
+            <a href="#rewards" class="nav-item">♛ Rewards</a>
+        </nav>
+
+        <!-- STUDENT PROFILE -->
+        <div class="sidebar-bottom">
+
+            <div class="mini-avatar" aria-hidden="true">
+                {{ (student.name or 'S')[:1]|upper }}
+            </div>
+
+            <div class="student-details">
+                <strong>{{ student.name }}</strong>
+                <small>Learning Explorer</small>
+                <small>{{ student.email }}</small>
+            </div>
+
+        </div>
+
+        <!-- LOGOUT -->
+        <form action="{{ url_for('logout') }}"
+              method="POST"
+              style="margin-top:20px;">
+
+            <button type="submit" class="course-btn">
+                ↪ Logout
+            </button>
+
+        </form>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="overview">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">YOUR LEARNING SPACE</p>
+                <h2>Student Dashboard</h2>
+            </div>
+
+            <div class="profile">
+
+                <div class="avatar" aria-hidden="true">
+                    {{ (student.name or 'S')[:1]|upper }}
+                </div>
+
+                <div>
+                    <strong>
+                        Welcome, {{ student.name }}!
+                    </strong>
+
+                    <small>Ready to learn today?</small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- WELCOME SECTION -->
+        <section class="welcome">
+
+            <div>
+                <p class="welcome-tag">
+                    ✦ YOUR NEXT CHAPTER STARTS HERE
+                </p>
+
+                <h1>
+                    Small steps.<br>
+                    <span>Big dreams.</span>
+                </h1>
+
+                <p>
+                    Hello, {{ student.name }}! Learn at your own
+                    pace. Every effort brings you closer
+                    to your goals.
+                </p>
+
+                <a href="#learning" class="primary-btn">
+                    Explore Learning →
+                </a>
+            </div>
+
+            <div class="welcome-art" aria-hidden="true">🌱</div>
+
+        </section>
+
+
+        <!-- STATS -->
+        <section class="stats" aria-label="Learning statistics">
+
+            <div class="stat-card">
+                <span aria-hidden="true">⭐</span>
+                <p>Total XP</p>
+                <h2 id="xp">0 XP</h2>
+                <small>Your learning points</small>
+            </div>
+
+            <div class="stat-card">
+                <span aria-hidden="true">🔥</span>
+                <p>Learning Streak</p>
+                <h2 id="streak">0 Days</h2>
+                <small>Not yet tracked</small>
+            </div>
+
+            <div class="stat-card">
+                <span aria-hidden="true">📚</span>
+                <p>Courses</p>
+                <h2>3</h2>
+                <small>Available to explore</small>
+            </div>
+
+            <div class="stat-card">
+                <span aria-hidden="true">🏆</span>
+                <p>Level</p>
+                <h2 id="level">Level 1</h2>
+                <small>Learning Explorer</small>
+            </div>
+
+        </section>
+
+
+<!-- LEARNING PATHS -->
+<section class="section" id="learning">
+
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">KEEP EXPLORING</p>
+            <h2>Your Learning Paths</h2>
+        </div>
+    </div>
+
+    <div class="courses">
+
+        <!-- MATHEMATICS -->
+        <article class="course-card"
+                 data-progress-subject="Mathematics">
+
+            <div class="course-icon purple"
+                 aria-hidden="true">➗</div>
+
+            <span class="course-label">FOUNDATION</span>
+            <h3>Mathematics</h3>
+
+            <p>Explore numbers, patterns and problem solving.</p>
+
+            <div class="progress-track"
+                 role="progressbar"
+                 aria-label="Mathematics progress"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-valuenow="0">
+                <div class="progress-fill progress-bar-fill"
+                     style="width:0%"></div>
+            </div>
+
+            <small class="progress-percent">0% completed</small>
+            <small class="progress-status">Start your first quiz!</small>
+
+            <button type="button" class="course-btn"
+                    onclick="openQuiz('Mathematics')">
+                Start Learning →
+            </button>
+        </article>
+
+
+        <!-- SCIENCE -->
+        <article class="course-card"
+                 data-progress-subject="Science">
+
+            <div class="course-icon blue"
+                 aria-hidden="true">🔬</div>
+
+            <span class="course-label">DISCOVER</span>
+            <h3>Science</h3>
+
+            <p>Discover the wonders of the world around you.</p>
+
+            <div class="progress-track"
+                 role="progressbar"
+                 aria-label="Science progress"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-valuenow="0">
+                <div class="progress-fill progress-bar-fill blue-fill"
+                     style="width:0%"></div>
+            </div>
+
+            <small class="progress-percent">0% completed</small>
+            <small class="progress-status">Start your first quiz!</small>
+
+            <button type="button" class="course-btn"
+                    onclick="openQuiz('Science')">
+                Start Learning →
+            </button>
+        </article>
+
+
+        <!-- ENGLISH -->
+        <article class="course-card"
+                 data-progress-subject="English">
+
+            <div class="course-icon pink"
+                 aria-hidden="true">📖</div>
+
+            <span class="course-label">GROW</span>
+            <h3>English</h3>
+
+            <p>Build vocabulary and communication skills.</p>
+
+            <div class="progress-track"
+                 role="progressbar"
+                 aria-label="English progress"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-valuenow="0">
+                <div class="progress-fill progress-bar-fill pink-fill"
+                     style="width:0%"></div>
+            </div>
+
+            <small class="progress-percent">0% completed</small>
+            <small class="progress-status">Start your first quiz!</small>
+
+            <button type="button" class="course-btn"
+                    onclick="openQuiz('English')">
+                Start Learning →
+            </button>
+        </article>
+
+    </div>
+</section>
+
+          
+
+        <!-- QUIZ CHALLENGE -->
+        <section class="quiz-section" id="quiz">
+
+            <div>
+                <p class="eyebrow">READY FOR A CHALLENGE?</p>
+
+                <h2>Test your knowledge 🧠</h2>
+
+                <p>
+                    Answer a quick question and earn your first XP.
+                </p>
+            </div>
+
+            <button type="button"
+                    class="primary-btn"
+                    onclick="openQuiz('Mathematics')">
+                Try a Quiz →
+            </button>
+
+        </section>
+
+
+        <!-- QUIZ AREA -->
+        <section class="quiz-box"
+                 id="quizBox"
+                 aria-label="Quiz challenge"
+                 hidden>
+
+            <p class="eyebrow" id="quizSubject">
+                QUICK CHALLENGE
+            </p>
+
+            <h2 id="question">Loading question...</h2>
+
+            <div id="options" class="options"></div>
+
+            <p id="feedback" aria-live="polite"></p>
+
+            <button type="button"
+                    id="nextBtn"
+                    class="primary-btn"
+                    hidden
+                    onclick="nextQuestion()">
+                Next Question →
+            </button>
+
+        </section>
+
+
+        <!-- REWARDS -->
+        <section class="section" id="rewards">
+
+            <p class="eyebrow">CELEBRATE YOUR PROGRESS</p>
+
+            <h2>Your Rewards ✨</h2>
+
+            <div class="reward-card">
+
+                <span aria-hidden="true">🌟</span>
+
+                <div>
+                    <h3>First Steps</h3>
+                    <p>Complete your first quiz to earn XP.</p>
+                </div>
+
+                <span id="rewardStatus"
+                      class="reward-status">
+                    Locked
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+            MindMap AI · Learn with purpose. Grow with confidence.
+        </footer>
+
+    </main>
+
+</div>
+
+<!-- JAVASCRIPT -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

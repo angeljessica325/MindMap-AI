@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | MindMap AI</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div style="max-width:420px; margin:70px auto; padding:25px;">
+        <h1>✦ MindMap <span style="color:#b49aff">AI</span></h1>
+        <h2 style="margin:25px 0 10px;">Welcome back!</h2>
+        <p style="color:#aaa1cc;margin-bottom:20px;">
+            Continue your learning journey.
+        </p>
+
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <p style="color:#ff9cbb;margin-bottom:12px;">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+            <label>Email</label>
+            <input name="email" type="email" required maxlength="254"
+                   autocomplete="email" placeholder="Enter your email"
+                   style="width:100%;padding:13px;margin:8px 0 18px;">
+
+            <label>Password</label>
+            <input name="password" type="password" required
+                   autocomplete="current-password"
+                   placeholder="Enter your password"
+                   style="width:100%;padding:13px;margin:8px 0 18px;">
+
+            <button class="primary-btn" style="width:100%;" type="submit">
+                Login
+            </button>
+        </form>
+
+        <p style="margin-top:20px;color:#aaa1cc;">
+            New student?
+            <a href="{{ url_for('register') }}" style="color:#b49aff;">
+                Create account
+            </a>
+        </p>
+    </div>
+</body>
+</html>
+
+
